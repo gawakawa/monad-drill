@@ -3,6 +3,7 @@
 module Main where
 
 import Control.Monad.Identity
+import Data.Maybe (fromMaybe)
 
 main :: IO ()
 main = putStrLn "Hello, Haskell!"
@@ -43,3 +44,40 @@ identity19 :: IO ()
 identity19 = print @Int $ runIdentity $ do
     b <- Identity 6
     Identity $ b + 2
+
+maybe11 :: IO ()
+maybe11 = print @Int $ fromMaybe 0 $ do
+    Just 2
+
+maybe12 :: IO ()
+maybe12 = print $ fromMaybe False $ do
+    Just False
+
+maybe13 :: IO ()
+maybe13 = print @Int $ fromMaybe 0 $ do
+    Just $ 1 + 2
+
+maybe14 :: IO ()
+maybe14 = print $ fromMaybe () $ do
+    Nothing
+
+maybe15 :: IO ()
+maybe15 = print @(Maybe Int) $ fromMaybe Nothing $ do
+    Just $ Just 3
+
+maybe16 :: IO ()
+maybe16 = print @(Maybe (Maybe ())) $ fromMaybe Nothing $ do
+    Just $ Just Nothing
+
+maybe17 :: IO ()
+maybe17 = print $ fromMaybe "" $ do
+    Just "hello"
+
+maybe18 :: IO ()
+maybe18 = print $ fromMaybe (Left False) $ do
+    Just $ Right True
+
+maybe19 :: IO ()
+maybe19 = print @Int $ fromMaybe 0 $ do
+    b <- Just 6
+    Just $ b + 2
