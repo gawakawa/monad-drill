@@ -4,7 +4,7 @@ module Main where
 
 import Control.Monad.Identity
 import Data.Either (fromRight)
-import Data.Maybe (fromMaybe)
+import Data.Maybe (fromMaybe, listToMaybe)
 
 main :: IO ()
 main = putStrLn "Hello, Haskell!"
@@ -119,3 +119,40 @@ either19 :: IO ()
 either19 = print @Int $ fromRight 0 $ do
     b <- Right 6
     Right $ b + 2
+
+list11 :: IO ()
+list11 = print @Int $ fromMaybe 0 $ listToMaybe $ do
+    [2]
+
+list12 :: IO ()
+list12 = print $ fromMaybe False $ listToMaybe $ do
+    [False]
+
+list13 :: IO ()
+list13 = print @Int $ fromMaybe 0 $ listToMaybe $ do
+    [1 + 2]
+
+list14 :: IO ()
+list14 = print @(Maybe ()) $ fromMaybe Nothing $ listToMaybe $ do
+    [Nothing]
+
+list15 :: IO ()
+list15 = print @[Int] $ fromMaybe [] $ listToMaybe $ do
+    [[3]]
+
+list16 :: IO ()
+list16 = print @[Maybe ()] $ fromMaybe [] $ listToMaybe $ do
+    [[Nothing]]
+
+list17 :: IO ()
+list17 = print $ fromMaybe "" $ listToMaybe $ do
+    ["hello"]
+
+list18 :: IO ()
+list18 = print $ fromMaybe [] $ listToMaybe $ do
+    [[True]]
+
+list19 :: IO ()
+list19 = print @Int $ fromMaybe 0 $ listToMaybe $ do
+    b <- [6]
+    [b + 2]
