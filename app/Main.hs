@@ -3,6 +3,7 @@
 module Main where
 
 import Control.Monad.Identity
+import Data.Either (fromRight)
 import Data.Maybe (fromMaybe)
 
 main :: IO ()
@@ -81,3 +82,40 @@ maybe19 :: IO ()
 maybe19 = print @Int $ fromMaybe 0 $ do
     b <- Just 6
     Just $ b + 2
+
+either11 :: IO ()
+either11 = print @Int $ fromRight 0 $ do
+    Right 2
+
+either12 :: IO ()
+either12 = print $ fromRight False $ do
+    Right False
+
+either13 :: IO ()
+either13 = print @Int $ fromRight 0 $ do
+    Right $ 1 + 2
+
+either14 :: IO ()
+either14 = print @(Maybe ()) $ fromRight Nothing $ do
+    Right Nothing
+
+either15 :: IO ()
+either15 = print @(Either () Int) $ fromRight (Left ()) $ do
+    Right $ Right 3
+
+either16 :: IO ()
+either16 = print @(Either () (Maybe ())) $ fromRight (Left ()) $ do
+    Right $ Right Nothing
+
+either17 :: IO ()
+either17 = print $ fromRight "" $ do
+    Right "hello"
+
+either18 :: IO ()
+either18 = print $ fromRight (Left ()) $ do
+    Right $ Right True
+
+either19 :: IO ()
+either19 = print @Int $ fromRight 0 $ do
+    b <- Right 6
+    Right $ b + 2
